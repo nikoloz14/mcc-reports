@@ -1,0 +1,29 @@
+<% obj.each do |report| %>
+	<% if user_signed_in? %>
+    <% if current_user == report.user || current_user.admin? %>
+			<div class="row">
+				<div class="col-xs-8 col-xs-offset-2">
+					<div class="well well-lg">
+						<div class="article-title">
+							<%= link_to report.title, report_path(report) %>
+						</div>
+						<div class="article-body">
+							<%= truncate(report.report, length: 100) %>
+							<div class="article-meta-details">
+								<small>Created by: <%= report.user.email if report.user%>,
+											<%= time_ago_in_words(report.created_at) %> ago,
+											last updated: <%= time_ago_in_words(report.updated_at) %> ago </small>
+							</div>
+						</div>
+						<% if user_signed_in? && (current_user == report.user || current_user.admin?) %>
+							<div class="article-actions">
+								<%= link_to "Edit this report", edit_report_path(report), class: "btn btn-xs btn-primary" %>
+								<%= link_to "Delete this report", report_path(report), method: :delete, data: { confirm: "Are you sure you want to delete the report?" }, class: "btn btn-xs btn-danger" %>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+<% end %>
