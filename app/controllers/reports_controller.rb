@@ -1,5 +1,7 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy, :new]
+  before_action :check_validation, only: [:show, :edit, :update, :destroy]
 
   # GET /reports
   # GET /reports.json
@@ -25,7 +27,7 @@ class ReportsController < ApplicationController
   # POST /reports.json
   def create
     @report = Report.new(report_params)
-
+    @report.user = current_user
     respond_to do |format|
       if @report.save
         format.html { redirect_to @report, notice: 'Report was successfully created.' }
@@ -70,5 +72,12 @@ class ReportsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
       params.require(:report).permit(:title, :report)
+    end
+
+    def check_validation
+      if !current_user.admin? && @report.user != current_user
+        flash[:danger] = "You can only edit/delete/show your own reports"
+        redirect_to root_path
+      end
     end
 end
