@@ -38,6 +38,19 @@
     background-color: #8e24aa;
 }
 
+.pagination > li > a, .pagination > li > span {
+    color: #6a1b9a;
+}
+
+.pagination > li > a:hover, .pagination > li > span:hover {
+    color: #6a1b9a;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+    background-color: #6a1b9a;
+    border-color: #6a1b9a;
+}
+
 #logo {
     float: left;
     font-size: 1.7em;
@@ -143,6 +156,21 @@ footer ul li {
 }
 
 .btn-primary:hover {
+    background-color: #6a1b7a;
+    border-color: #6a1b9a;
+}
+
+.btn-primary:after {
+    background-color: #6a1b7a;
+    border-color: #6a1b9a;
+}
+
+.btn-primary:active:after {
+    background-color: #6a1b7a;
+    border-color: #6a1b9a;
+}
+
+.btn-primary:visited {
     background-color: #6a1b7a;
     border-color: #6a1b9a;
 }
